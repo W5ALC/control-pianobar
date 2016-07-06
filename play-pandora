@@ -59,22 +59,22 @@ elif [ "$choice" == "$Comedy" ]; then
 echo -e "$comedy\n$station1\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
 control-pianobar.sh p
 elif [ "$choice" == "$Motown" ]; then
-echo -e "$music\n$station3\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$tls" > ~/.config/pianobar/config
+echo -e "$music\n$station3\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
 control-pianobar.sh p
 elif [ "$choice" == "$Pop" ]; then
-echo -e "$music\n$station6\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$tls" > ~/.config/pianobar/config
+echo -e "$music\n$station6\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
 control-pianobar.sh p
 elif [ "$choice" == "$QuickMix" ]; then
-echo -e "$music\n$station2\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$tls" > ~/.config/pianobar/config
+echo -e "$music\n$station2\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
 control-pianobar.sh p
 elif [ "$choice" == "$Realmix" ]; then
-echo -e "$music\n$station7\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$tls" > ~/.config/pianobar/config
+echo -e "$music\n$station7\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
 control-pianobar.sh p
 elif [ "$choice" == "$Rock" ]; then
-echo -e "$music\n$station5\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$tls" > ~/.config/pianobar/config
+echo -e "$music\n$station5\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
 control-pianobar.sh p
 elif [ "$choice" == "$SRV" ]; then
-echo -e "$music\n$station4\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$tls" > ~/.config/pianobar/config
+echo -e "$music\n$station4\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
 control-pianobar.sh p
 else
 exit
