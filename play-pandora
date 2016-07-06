@@ -1,0 +1,82 @@
+#!/bin/bash
+
+# Accounts (If Multiple)
+Comedy="Comedy"
+comedy="user = COMEDYACCOUNT@gmail.com"
+
+Music="Music"
+music="user = MUSICACCOUNT@gmail.com"
+
+# Stations
+Pop="90s Hits"
+Comedy="Comedy"
+Realmix="Genre Hop"
+Motown="Motown"
+QuickMix="QuickMix"
+Rock="Rock Hits"
+SRV="SRV"
+
+# Zenity Gui Options
+# Change any Labels from the stations above 
+# and make corresponding changes below
+choice=`zenity --height=300 --width=300 --list --title="Select Pandora Station" --radiolist --text 'What do you want to hear?' --column 'Select...'  --column 'Station' FALSE "$Pop" TRUE "$Comedy" FALSE "$Realmix" FALSE "$Motown" FALSE "$QuickMix" FALSE "$Rock" FALSE "$SRV"`
+
+#Get your station ID from pianobar or you can also attain them on Pandora.com
+station1="autostart_station = YOUR-STATION-ID1"
+station2="autostart_station = YOUR-STATION-ID2"
+station3="autostart_station = YOUR-STATION-ID3"
+station4="autostart_station = YOUR-STATION-ID4"
+station5="autostart_station = YOUR-STATION-ID5"
+station6="autostart_station = YOUR-STATION-ID6"
+station7="autostart_station = YOUR-STATION-ID7"
+
+password="password = <PASSWORD HERE>"
+# Event Command with download capabilities
+script="event_command = /home/<YOUR USERNAME HERE>/.config/pianobar/pianobar-notify.sh"
+
+#Song Format
+song="format_nowplaying_song = [1;32m%t[1;36m ☠  [1;33m%a[1;36m ☠  [1;32m%l[31m%r[1;36m"
+playing="format_nowplaying_station = Station [1;32m%n[1;36m (%i)"
+format="format_list_song = %i) %a - %t%r"
+
+# If you dont have a ctl file Run : and run mkfifo ~/.config/pianobar/ctl
+pipe="fifo = /home/<YOUR USERNAME HERE>/.config/pianobar/ctl"
+songlist="history = 25"
+
+#The outcome of these will be determined by the choice of station from Zenity.
+#The config file will be written on the spot to have the correct options.
+#**ANY CHANGES MADE TO STATIONS AT THE TOP ALSO NEED TO BE CORRECTED HERE***
+
+
+ ##############################################################################
+ ## elif [ "$choice" == "$Realmix" ]; then                                   ##
+ ## echo -e "$music\n$station7\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$tls" > ~/.config/pianobar/config
+ ##control-pianobar.sh p                                                     ##
+ ##############################################################################
+if [ "$?" == "1" ]; then
+    exit
+elif [ "$choice" == "$Comedy" ]; then
+echo -e "$comedy\n$station1\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
+control-pianobar.sh p
+elif [ "$choice" == "$Motown" ]; then
+echo -e "$music\n$station3\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$tls" > ~/.config/pianobar/config
+control-pianobar.sh p
+elif [ "$choice" == "$Pop" ]; then
+echo -e "$music\n$station6\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$tls" > ~/.config/pianobar/config
+control-pianobar.sh p
+elif [ "$choice" == "$QuickMix" ]; then
+echo -e "$music\n$station2\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$tls" > ~/.config/pianobar/config
+control-pianobar.sh p
+elif [ "$choice" == "$Realmix" ]; then
+echo -e "$music\n$station7\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$tls" > ~/.config/pianobar/config
+control-pianobar.sh p
+elif [ "$choice" == "$Rock" ]; then
+echo -e "$music\n$station5\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$tls" > ~/.config/pianobar/config
+control-pianobar.sh p
+elif [ "$choice" == "$SRV" ]; then
+echo -e "$music\n$station4\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$tls" > ~/.config/pianobar/config
+control-pianobar.sh p
+else
+exit
+fi
+
