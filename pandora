@@ -1,0 +1,100 @@
+#!/bin/bash
+
+# Accounts (If Multiple)
+comedy="user = EMAIL_ACCOUNT_1"
+music="user = EMAIL_ACCOUNT_2"
+password="password = PASSWORD#!"
+
+#Get your station ID from pianobar or you can also attain them on Pandora.com
+station1="autostart_station = AUTOSTART_STATION_ID1" # Comedy Station
+station2="autostart_station = AUTOSTART_STATION_ID2" # Quick Mix Station
+station3="autostart_station = AUTOSTART_STATION_ID3" # Motown Station
+station4="autostart_station = AUTOSTART_STATION_ID4" # SRV Station
+station5="autostart_station = AUTOSTART_STATION_ID5" # Rock Mix Station
+station6="autostart_station = AUTOSTART_STATION_ID6" # 90s Pop Station
+station7="autostart_station = AUTOSTART_STATION_ID7" # Genre Hop Station
+
+#Song Format
+song="format_nowplaying_song = %t  ☠  %a  ☠  %l %r"
+playing="format_nowplaying_station = Station  %n (%i)"
+format="format_list_song = %i) %a - %t%r"
+
+# If you dont have a ctl file Run : and run mkfifo ~/.config/pianobar/ctl
+pipe="fifo = ~/.config/pianobar/ctl"
+songlist="history = 25"
+clear
+if [ "$1" == "--help" ] ; then
+        echo ""
+        echo ""
+        echo ""
+        echo "          Usage: $ pandora"
+        echo "          What Station would you like to listen to?"
+        echo "          1) 90s Hits: type 1 or 90s"
+        echo "          2) Comedy: type 2, comedy or Comedy"
+        echo "          3) Genre Hop: type 3, hop or genremix"
+        echo "          4) Motown: type 4, motown or Motown"
+        echo "          5) QuickMix: type 5, quickmix or Quickmix"
+        echo "          6) Rock Hits: type 6, rock or Rock"
+        echo "          7) SRV: type 7, srv or SRV"
+        echo "          x) exit: type x, X or exit"
+        echo "          Any other option will loop back to this menu"
+        sleep 1
+	exit;
+    fi
+while true
+do
+	echo "         What Station would you like to listen to?"
+        echo "          1) 90s Hits: type 1 or 90s"
+        echo "          2) Comedy: type 2, comedy or Comedy"
+        echo "          3) Genre Hop: type 3, hop or genremix"
+        echo "          4) Motown: type 4, motown or Motown"
+        echo "          5) QuickMix: type 5, quickmix or Quickmix"
+        echo "          6) Rock Hits: type 6, rock or Rock"
+        echo "          7) SRV: type 7, srv or SRV"
+        echo "          x) exit: type x, q, X or exit"
+	read -p "Enter your choice: " CHOICE
+	case "$CHOICE" in
+		1|90s)
+            echo -e "$music\n$station6\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
+            pianobar
+            exit
+			;;
+		2|comedy|Comedy)
+			      echo -e "$comedy\n$station1\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
+            pianobar
+            exit
+			;;
+	  3|hop|genremix)
+			      echo -e "$music\n$station7\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
+            pianobar
+            exit
+			;;
+		4|motown|Motown)
+		      	echo -e "$music\n$station3\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
+            pianobar
+            exit
+			;;
+		5|mix|quickmix|Quickmix)
+            echo -e "$music\n$station2\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
+            pianobar
+            exit
+			;;
+		6|rock|Rock)
+			      echo -e "$music\n$station5\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
+            pianobar
+            exit
+			;;
+    7|srv|SRV)
+		      	echo -e "$music\n$station4\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
+            pianobar
+            exit
+			;;
+		x|X|exit|q)
+		      	echo "Thanks for Listening... Goodbye"
+			      exit
+			;;
+		*)
+			      echo "Invalid choice! Try again."
+			;;
+	esac
+done
