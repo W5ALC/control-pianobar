@@ -3,7 +3,7 @@
 # Accounts (If Multiple)
 comedy="user = EMAIL_ACCOUNT_1"
 music="user = EMAIL_ACCOUNT_2"
-password="password = PASSWORD#!"
+password="password_command = gpg2 --decrypt ~/.config/pianobar/password"
 
 #Get your station ID from pianobar or you can also attain them on Pandora.com
 station1="autostart_station = AUTOSTART_STATION_ID1" # Comedy Station
@@ -14,44 +14,84 @@ station5="autostart_station = AUTOSTART_STATION_ID5" # Rock Mix Station
 station6="autostart_station = AUTOSTART_STATION_ID6" # 90s Pop Station
 station7="autostart_station = AUTOSTART_STATION_ID7" # Genre Hop Station
 
-#Song Format
-song="format_nowplaying_song = %t  ☠  %a  ☠  %l %r"
-playing="format_nowplaying_station = Station  %n (%i)"
-format="format_list_song = %i) %a - %t%r"
-
+song="format_nowplaying_song = [1;4m[1;96m%t[m  ☠  [1;4m%a[m ☠  [1;4m[1;33m%l [m%r [m"
+playing="format_nowplaying_station = [1;4mNow Playing[m [1;4m[1;94m%n[m [1;4m[1;31m(%i) [m [1;4m[1;35m"
+format="format_list_song = %i)  [m[1;4m[1;96m%t[m - [1;4m%a[m [1;32m%r [m"
+time_format="format_time = [1;4m[1;4m%e[m/[1;4m[1;31m%t [m"
 # If you dont have a ctl file Run : and run mkfifo ~/.config/pianobar/ctl
 pipe="fifo = ~/.config/pianobar/ctl"
 songlist="history = 25"
+pe ()
+{
+# Passphrase encryption program
+# Created by Dave Crouse 01-13-2006
+# Reads input from text editor and encrypts to screen.
+# Adapted for Pianobar to Dynamically create encrypted password for pianobar
+clear
+echo "         Password Encryption For Pianobar";
+echo "--------------------------------------------------"; echo "";
+which $EDITOR &>/dev/null
+ if [ $? != "0" ];
+     then
+     echo "It appears that you do not have a text editor set in your
+.bashrc file.";
+     echo "What editor would you like to use ? " ;
+     read EDITOR ; echo "";
+ fi
+$EDITOR pandorapassword
+gpg2 --armor --comment "$comment" --no-options --output pandorapassword.gpg --symmetric pandorapassword
+shred -u pandorapassword ; clear
+cat pandorapassword.gpg > ~/.config/pianobar/password
+shred -u pandorapassword.gpg ;
+clear
+}
+
 clear
 if [ "$1" == "--help" ] ; then
         echo ""
         echo ""
         echo ""
-        echo "          Usage: $ pandora"
+        echo "          Usage: $ [1mpandora[m"
         echo "          What Station would you like to listen to?"
-        echo "          1) 90s Hits: type 1 or 90s"
-        echo "          2) Comedy: type 2, comedy or Comedy"
-        echo "          3) Genre Hop: type 3, hop or genremix"
-        echo "          4) Motown: type 4, motown or Motown"
-        echo "          5) QuickMix: type 5, quickmix or Quickmix"
-        echo "          6) Rock Hits: type 6, rock or Rock"
-        echo "          7) SRV: type 7, srv or SRV"
-        echo "          x) exit: type x, X or exit"
+        echo "          1) [1;4m[1;32m90s Hits[m: [1;4m[1;31mtype[m [1;4m[1;33m1[m or [1;4m[1;33m90s[m"
+        echo "          2) [1;4m[1;32mComedy[m: [1;4m[1;31mtype[m [1;4m[1;33m2[m, [1;4m[1;33mcomedy[m or [1;4m[1;33mComedy[m"
+        echo "          3) [1;4m[1;32mGenre Hop[m: [1;4m[1;31mtype[m [1;4m[1;33m3[m, [1;4m[1;33mhop[m or [1;4m[1;33mgenremix[m"
+        echo "          4) [1;4m[1;32mMotown[m: [1;4m[1;31mtype[m [1;4m[1;33m4[m, [1;4m[1;33mmotown[m or [1;4m[1;33mMotown[m"
+        echo "          5) [1;4m[1;32mQuickMix[m: [1;4m[1;31mtype[m [1;4m[1;33m5[m, [1;4m[1;33mquickmix[m or [1;4m[1;33mQuickmix[m"
+        echo "          6) [1;4m[1;32mRock Hits[m: [1;4m[1;31mtype[m [1;4m[1;33m6[m, [1;4m[1;33mrock[m or [1;4m[1;33mRock[m"
+        echo "          7) [1;4m[1;32mSRV[m: [1;4m[1;31mtype[m [1;4m[1;33m7[m, [1;4m[1;33msrv[m or [1;4m[1;33mSRV[m"
+        echo "          x) [1;4m[1;32mexit[m: [1;4m[1;31mtype[m [1;4m[1;33mx[m, [1;4m[1;33mq[m, [1;4m[1;33mX[m or [1;4m[1;33mexit[m"
         echo "          Any other option will loop back to this menu"
         sleep 1
 	exit;
-    fi
+fi
+if [ ! -f ~/.config/pianobar/password ] ; then
+        pe
+fi
 while true
 do
-	echo "         What Station would you like to listen to?"
-        echo "          1) 90s Hits: type 1 or 90s"
-        echo "          2) Comedy: type 2, comedy or Comedy"
-        echo "          3) Genre Hop: type 3, hop or genremix"
-        echo "          4) Motown: type 4, motown or Motown"
-        echo "          5) QuickMix: type 5, quickmix or Quickmix"
-        echo "          6) Rock Hits: type 6, rock or Rock"
-        echo "          7) SRV: type 7, srv or SRV"
-        echo "          x) exit: type x, q, X or exit"
+        echo "        [4m What Station would you like to listen to?[m"
+        echo "          1) [1;4m[1;32m90s Hits[m: [1;4m[1;31mtype[m [1;4m[1;33m1[m or [1;4m[1;33m90s[m"
+        echo "          2) [1;4m[1;32mComedy[m: [1;4m[1;31mtype[m [1;4m[1;33m2[m, [1;4m[1;33mcomedy[m or [1;4m[1;33mComedy[m"
+        echo "          3) [1;4m[1;32mGenre Hop[m: [1;4m[1;31mtype[m [1;4m[1;33m3[m, [1;4m[1;33mhop[m or [1;4m[1;33mgenremix[m"
+        echo "          4) [1;4m[1;32mMotown[m: [1;4m[1;31mtype[m [1;4m[1;33m4[m, [1;4m[1;33mmotown[m or [1;4m[1;33mMotown[m"
+        echo "          5) [1;4m[1;32mQuickMix[m: [1;4m[1;31mtype[m [1;4m[1;33m5[m, [1;4m[1;33mquickmix[m or [1;4m[1;33mQuickmix[m"
+        echo "          6) [1;4m[1;32mRock Hits[m: [1;4m[1;31mtype[m [1;4m[1;33m6[m, [1;4m[1;33mrock[m or [1;4m[1;33mRock[m"
+        echo "          7) [1;4m[1;32mSRV[m: [1;4m[1;31mtype[m [1;4m[1;33m7[m, [1;4m[1;33msrv[m or [1;4m[1;33mSRV[m"
+        echo "          x) [1;4m[1;32mexit[m: [1;4m[1;31mtype[m [1;4m[1;33mx[m, [1;4m[1;33mq[m, [1;4m[1;33mX[m or [1;4m[1;33mexit[m"
+	read -p "Enter your choice: " CHOICE
+
+while true
+do
+	echo "What Station would you like to listen to?"
+	echo "1) 90s Hits"
+    echo "2) Comedy"
+    echo "3) Genre Hop"
+    echo "4) Motown"
+    echo "5) QuickMix"
+    echo "6) Rock Hits"
+    echo "7) SRV"
+	echo "x) exit"
 	read -p "Enter your choice: " CHOICE
 	case "$CHOICE" in
 		1|90s)
@@ -60,17 +100,17 @@ do
             exit
 			;;
 		2|comedy|Comedy)
-			      echo -e "$comedy\n$station1\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
+			echo -e "$comedy\n$station1\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
             pianobar
             exit
 			;;
-	  3|hop|genremix)
-			      echo -e "$music\n$station7\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
+        3|hop|genremix)
+			echo -e "$music\n$station7\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
             pianobar
             exit
 			;;
 		4|motown|Motown)
-		      	echo -e "$music\n$station3\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
+			echo -e "$music\n$station3\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
             pianobar
             exit
 			;;
@@ -80,21 +120,21 @@ do
             exit
 			;;
 		6|rock|Rock)
-			      echo -e "$music\n$station5\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
+			echo -e "$music\n$station5\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
             pianobar
             exit
 			;;
-    7|srv|SRV)
-		      	echo -e "$music\n$station4\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
+        7|srv|SRV)
+			echo -e "$music\n$station4\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist" > ~/.config/pianobar/config
             pianobar
             exit
 			;;
 		x|X|exit|q)
-		      	echo "Thanks for Listening... Goodbye"
-			      exit
+			echo "Thanks for Listening... Goodbye"
+			exit
 			;;
 		*)
-			      echo "Invalid choice! Try again."
+			echo "Invalid choice! Try again."
 			;;
 	esac
 done
