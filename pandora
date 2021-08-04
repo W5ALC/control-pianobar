@@ -169,7 +169,7 @@ if [ "$1" == "--text" ] || [ "$1" == "-t" ] ; then
                 echo -e "$music\n$station4\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$FMI\n$FMN\n$FMT\n$FME\n$FMQ" > ~/.config/pianobar/config
                 pianobar
                 exit
-                ;;
+                    ;;
             *) whiptail --msgbox "Whoooops, script error: unrecognized option" $msgbox_height $msgbox_width ;;
             esac
         fi
@@ -189,56 +189,56 @@ else
         echo ""
 	read -p "Enter your choice: " CHOICE
     case "$CHOICE" in
-		1|90s)
+	1|90s)
             echo -e "$music\n$station6\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$FMI\n$FMN\n$FMT\n$FME\n$FMQ" > ~/.config/pianobar/config
             clear
             pianobar
             exit
-			;;
-		2|comedy|Comedy)
-			echo -e "$comedy\n$station1\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$FMI\n$FMN\n$FMT\n$FME\n$FMQ" > ~/.config/pianobar/config
+		;;
+	2|comedy|Comedy)
+	    echo -e "$comedy\n$station1\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$FMI\n$FMN\n$FMT\n$FME\n$FMQ" > ~/.config/pianobar/config
             clear
             pianobar
             exit
-			;;
+		;;
         3|hop|genremix)
-			echo -e "$music\n$station7\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$FMI\n$FMN\n$FMT\n$FME\n$FMQ" > ~/.config/pianobar/config
+	    echo -e "$music\n$station7\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$FMI\n$FMN\n$FMT\n$FME\n$FMQ" > ~/.config/pianobar/config
             clear
             pianobar
             exit
-			;;
-		4|motown|Motown)
-			echo -e "$music\n$station3\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$FMI\n$FMN\n$FMT\n$FME\n$FMQ" > ~/.config/pianobar/config
+		;;
+	4|motown|Motown)
+	    echo -e "$music\n$station3\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$FMI\n$FMN\n$FMT\n$FME\n$FMQ" > ~/.config/pianobar/config
             clear
             pianobar
             exit
-			;;
-		5|mix|quickmix|Quickmix)
+		;;
+	5|mix|quickmix|Quickmix)
             echo -e "$music\n$station2\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$FMI\n$FMN\n$FMT\n$FME\n$FMQ" > ~/.config/pianobar/config
             clear
             pianobar
             exit
-			;;
-		6|rock|Rock)
-			echo -e "$music\n$station5\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$FMI\n$FMN\n$FMT\n$FME\n$FMQ" > ~/.config/pianobar/config
+		;;
+	6|rock|Rock)
+	    echo -e "$music\n$station5\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$FMI\n$FMN\n$FMT\n$FME\n$FMQ" > ~/.config/pianobar/config
             clear
             pianobar
             exit
-			;;
+		;;
         7|srv|SRV)
-			echo -e "$music\n$station4\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$FMI\n$FMN\n$FMT\n$FME\n$FMQ" > ~/.config/pianobar/config
+	    echo -e "$music\n$station4\n$password\n$script\n$song\n$playing\n$format\n$pipe\n$songlist\n$FMI\n$FMN\n$FMT\n$FME\n$FMQ" > ~/.config/pianobar/config
             clear
             pianobar
             exit
-			;;
-		x|X|exit|q)
+		;;
+	x|X|exit|q)
             clear
-			echo "Thanks for Listening... Goodbye"
-			exit
-			;;
-		*)
-			echo "Invalid choice! Try again."
-			;;
+	    echo "Thanks for Listening... Goodbye"
+	    exit
+		;;
+	*)
+	    echo "Invalid choice! Try again."
+		;;
 	esac
 fi
 done
